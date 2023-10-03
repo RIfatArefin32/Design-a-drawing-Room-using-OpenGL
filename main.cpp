@@ -9,7 +9,7 @@
 #include "camera.h"
 #include "basic_camera.h"
 #include "fan.h"
-
+#include "cylinders.h"
 #include <iostream>
 
 using namespace std;
@@ -403,6 +403,38 @@ int main()
         0.0f, 0.0f, 0.5f, 0.95f, 0.95f, 0.95f
     };
 
+    float lamp_ver[] = {
+       0.0f, 0.0f, 0.0f, 0.96, .52, .26,
+       0.5f, 0.0f, 0.0f, 0.96, .52, .26,
+       0.1f, 0.5f, 0.1f, 0.96, .89, .26,
+       0.4f, 0.5f, 0.1f, 0.96, .89, .26,
+
+       0.5f, 0.0f, 0.0f, 0.96, .89, .26,
+       0.4f, 0.5f, 0.1f, 0.96, .89, .26,
+       0.5f, 0.0f, 0.5f, 0.96, .52, .26,
+       0.4f, 0.5f, 0.4f, 0.96, .52, .26,
+
+       0.0f, 0.0f, 0.5f, 0.96, .52, .26,
+       0.5f, 0.0f, 0.5f, 0.96, .52, .26,
+       0.4f, 0.5f, 0.4f, 0.96, .89, .26,
+       0.1f, 0.5f, 0.4f, 0.96, .89, .26,
+
+       0.0f, 0.0f, 0.5f, 0.96, .52, .26,
+       0.1f, 0.5f, 0.4f, 0.96, .52, .26,
+       0.1f, 0.5f, 0.1f, 0.96, .89, .26,
+       0.0f, 0.0f, 0.0f, 0.96, .89, .26,
+
+       0.4f, 0.5f, 0.4f, 0,0,0,
+       0.4f, 0.5f, 0.1f, 0,0,0,
+       0.1f, 0.5f, 0.1f, 0,0,0,
+       0.1f, 0.5f, 0.4f, 0,0,0,
+
+       0.0f, 0.0f, 0.0f, 0.96, .89, .26,
+       0.5f, 0.0f, 0.0f, 0.96, .89, .26,
+       0.5f, 0.0f, 0.5f, 0.96, .89, .26,
+       0.0f, 0.0f, 0.5f, 0.96, .89, .26,
+    };
+
     float fan_holder[] = {
         0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f,
         0.5f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f,
@@ -558,7 +590,6 @@ int main()
         0.5f, 0.0f, 0.5f, 0.29f, 0.0f, 0.29f,
         0.0f, 0.0f, 0.5f, 0.29f, 0.0f, 0.29f
     };
-
     float tv1[] = {
         0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f,
         0.5f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f,
@@ -590,7 +621,6 @@ int main()
         0.5f, 0.0f, 0.5f, 0.0f, 0.0f, 0.0f,
         0.0f, 0.0f, 0.5f, 0.0f, 0.0f, 0.0f,
     };
-
     float circle_vertices5[] = {
         0.0,.70,0.0,        1.0, 1.0, 1.0,
        0.25,.70,0.0,        1.0, 1.0, 1.0,
@@ -614,7 +644,6 @@ int main()
        .707 / 2,-.30,-.707/2,   1.0, 1.0, 1.0,
 
     };
-
     unsigned int circle_indices[] = {
        0,1,2,
        0,2,3,
@@ -702,6 +731,25 @@ int main()
     glEnableVertexAttribArray(1);
 
 
+    
+    unsigned int VBOLMP, VAOLMP, EBOLMP;
+    glGenVertexArrays(1, &VAOLMP);
+    glGenBuffers(1, &VBOLMP);
+    glGenBuffers(1, &EBOLMP);
+    glBindVertexArray(VAOLMP);
+    glBindBuffer(GL_ARRAY_BUFFER, VBOLMP);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(lamp_ver), lamp_ver, GL_STATIC_DRAW);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBOLMP);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(cube_indices), cube_indices, GL_STATIC_DRAW);
+    // position attribute
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+    glEnableVertexAttribArray(0);
+    //color attribute
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)12);
+    glEnableVertexAttribArray(1);
+
+
+    
     unsigned int VBO, VAO, EBO;
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
@@ -888,6 +936,9 @@ int main()
     glEnableVertexAttribArray(1);
 
     int i = 0;
+
+
+
 
     // render loop
     // -----------
@@ -1080,19 +1131,19 @@ int main()
         
 
         //Lamp
-        model = transforamtion(9, 2, 9.5, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, 1, 1, 1);
+        model = transforamtion(8.5, 1.75, 9, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, 1.2, 2.35, 1.2);
         ourShader.setMat4("model", model);
-        glBindVertexArray(circle_VAO);
+        glBindVertexArray(VAOLMP);
         glDrawElements(GL_TRIANGLES, 96, GL_UNSIGNED_INT, 0);
 
-        model = transforamtion(8.9625, 0, 9.4625, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, .15, 5, .15);
+        model = transforamtion(8.8, 0, 9.3, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, .15, 5, .15);
         ourShader.setMat4("model", model);
-        glBindVertexArray(VAOF2);
+        glBindVertexArray(VAOTV);
         glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 
-        model = transforamtion(9, 0, 9.5, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, 1, 0.2, 1);
+        model = transforamtion(8.5, 0, 9, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, 1.2, 0.5, 1.2);
         ourShader.setMat4("model", model);
-        glBindVertexArray(circle_VAO);
+        glBindVertexArray(VAOTV);
         glDrawElements(GL_TRIANGLES, 96, GL_UNSIGNED_INT, 0);
    
         
