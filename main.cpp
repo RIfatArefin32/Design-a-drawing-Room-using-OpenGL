@@ -404,15 +404,17 @@ int main()
     };
 
     float lamp_ver[] = {
-       0.0f, 0.0f, 0.0f, 0.96, .52, .26,
-       0.5f, 0.0f, 0.0f, 0.96, .52, .26,
-       0.1f, 0.5f, 0.1f, 0.96, .89, .26,
-       0.4f, 0.5f, 0.1f, 0.96, .89, .26,
+       
 
        0.5f, 0.0f, 0.0f, 0.96, .89, .26,
        0.4f, 0.5f, 0.1f, 0.96, .89, .26,
        0.5f, 0.0f, 0.5f, 0.96, .52, .26,
        0.4f, 0.5f, 0.4f, 0.96, .52, .26,
+
+       0.0f, 0.0f, 0.0f, 0.96, .52, .26,
+       0.5f, 0.0f, 0.0f, 0.96, .52, .26,
+       0.1f, 0.5f, 0.1f, 0.96, .89, .26,
+       0.4f, 0.5f, 0.1f, 0.96, .89, .26,
 
        0.0f, 0.0f, 0.5f, 0.96, .52, .26,
        0.5f, 0.0f, 0.5f, 0.96, .52, .26,
@@ -1136,7 +1138,7 @@ int main()
         glBindVertexArray(VAOLMP);
         glDrawElements(GL_TRIANGLES, 96, GL_UNSIGNED_INT, 0);
 
-        model = transforamtion(8.8, 0, 9.3, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, .15, 5, .15);
+        model = transforamtion(8.8, 0, 9.3, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, .15, 4, .15);
         ourShader.setMat4("model", model);
         glBindVertexArray(VAOTV);
         glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
