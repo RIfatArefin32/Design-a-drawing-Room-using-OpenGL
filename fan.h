@@ -52,14 +52,8 @@ public:
 
 		model = transforamtion(5.25, 4.25, 5.25, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, 1, -.05, 2.75);
 		modelMatrices.push_back(model);
-		
-		/*model = transforamtion(5.25, 4.25, 5.25, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, 1, -.05, -2.25);
-		modelMatrices.push_back(model);
 
-		model = transforamtion(5.25, 4.25, 5.25, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, -1, -.05, 2.25);
-		modelMatrices.push_back(model);*/
 
-		
 		unsigned int vertex_array[] = { VAOF3, VAOF3, VAOF3, VAOF3 };
 		glm::vec3 averagePosition(0.0f);
 		for (const glm::mat4& model : modelMatrices) {
@@ -69,11 +63,8 @@ public:
 		averagePosition /= modelMatrices.size();
 
 		glm::mat4 moveToOrigin = glm::translate(glm::mat4(1.0f), -averagePosition);
-
 		glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), glm::radians(angle), glm::vec3(0.0f, 1.0f, 0.0f));
-
 		glm::mat4 moveToOriginalPosition = glm::translate(glm::mat4(1.0f), averagePosition);
-
 		glm::mat4 groupTransform = moveToOriginalPosition * rotation * moveToOrigin;
 
 		int i = 0;
@@ -85,39 +76,6 @@ public:
 			glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 			i++;
 		}
-		return ourShader;
-	}
-
-	Shader ret_shader(Shader ourShader, unsigned int VAOF2, unsigned int VAOF3) {
-		glm::mat4 model;
-		float rotateAngle_X = 0;
-		float rotateAngle_Y = 0;
-		float rotateAngle_Z = 0;
-
-		//model = transforamtion(2.125, 2.25, -5.875, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, .5, .75, .5);
-		//ourShader.setMat4("model", model);
-		//glBindVertexArray(VAOF2);
-		//glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
-
-		model = transforamtion(4.5, 3.5, 5, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, .5, .05, 2);
-		ourShader.setMat4("model", model);
-		glBindVertexArray(VAOF3);
-		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
-
-		model = transforamtion(4.5, 3.5, 5, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, -.5, .05, -2);
-		ourShader.setMat4("model", model);
-		glBindVertexArray(VAOF3);
-		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
-
-		model = transforamtion(4.5, 3.5, 5, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, 2, .05, .5);
-		ourShader.setMat4("model", model);
-		glBindVertexArray(VAOF3);
-		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
-
-		model = transforamtion(4.5, 3.5, 5, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, -2, .05, -.5);
-		ourShader.setMat4("model", model);
-		glBindVertexArray(VAOF3);
-		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 		return ourShader;
 	}
 };

@@ -20,7 +20,7 @@ void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 void processInput(GLFWwindow* window);
 
 // settings
-const unsigned int SCR_WIDTH = 1000;
+const unsigned int SCR_WIDTH = 1500;
 const unsigned int SCR_HEIGHT = 800;
 
 // modelling transform
@@ -40,12 +40,13 @@ bool fan_turn = false;
 bool rotate_around = false;
 
 // camera
-Camera camera(glm::vec3(-1.0f, 2.5f, 3.0f));
+Camera camera(glm::vec3(-3.0f, 2.5f, 4.3f));
 float lastX = SCR_WIDTH / 2.0f;
 float lastY = SCR_HEIGHT / 2.0f;
 bool firstMouse = true;
 
-float eyeX = 0.0, eyeY = 1.0, eyeZ = 3.0;
+//Eye position
+float eyeX = 0.0, eyeY = 1.0, eyeZ = 4.1;
 float lookAtX = 0.0, lookAtY = 0.0, lookAtZ = 0.0;
 glm::vec3 V = glm::vec3(0.0f, 1.0f, 0.0f);
 BasicCamera basic_camera(eyeX, eyeY, eyeZ, lookAtX, lookAtY, lookAtZ, V);
@@ -116,7 +117,6 @@ int main()
     // ------------------------------------------------------------------
     
     //axis line 
-
     float cube_vertices2[] = {
         -0.25f, -0.25f, -0.25f, 0.0f, 0.0f, 0.0f,
         0.25f, -0.25f, -0.25f, 0.0f, 0.0f, 0.0f,
@@ -127,7 +127,6 @@ int main()
         0.25f, 0.25f, 0.25f, 0.2f, 0.7f, 0.3f,
         -0.25f, 0.25f, 0.25f, 0.6f, 0.2f, 0.8f,
     };
-
     float cube_vertices[] = {
         0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f,
         0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f,
@@ -209,7 +208,6 @@ int main()
         0.5f, 0.0f, 0.5f, 0.69f, 0.69f, 0.69f,
         0.0f, 0.0f, 0.5f, 0.69f, 0.69f, 0.69f
     };
-    //0.92f, 0.91f, 0.83f,
     float wall1[] = {
         0.0f, 0.0f, 0.0f, 0.92f, 0.91f, 0.83f,
         0.5f, 0.0f, 0.0f, 0.92f, 0.91f, 0.83f,
@@ -241,8 +239,6 @@ int main()
         0.5f, 0.0f, 0.5f, 0.92f, 0.91f, 0.83f,
         0.0f, 0.0f, 0.5f, 0.92f, 0.91f, 0.83f
     };
-
-    //0.99f, 0.84f, 0.70f,
     float wall2[] = {
         0.0f, 0.0f, 0.0f, 0.70, 0.77, 0.75,
         0.5f, 0.0f, 0.0f, 0.70, 0.77, 0.75,
@@ -274,7 +270,6 @@ int main()
         0.5f, 0.0f, 0.5f, 0.70, 0.77, 0.75,
         0.0f, 0.0f, 0.5f, 0.70, 0.77, 0.75,
     };
-
     float box[] = {
         0.0f, 0.0f, 0.0f, 0.647f, 0.165f, 0.165f,
         0.5f, 0.0f, 0.0f, 0.647f, 0.165f, 0.165f,
@@ -306,39 +301,37 @@ int main()
         0.5f, 0.0f, 0.5f, 0.647f, 0.165f, 0.165f,
         0.0f, 0.0f, 0.5f, 0.647f, 0.165f, 0.165f
     };
-
     float box2[] = {
-        0.0f, 0.0f, 0.0f, 0.1f, 0.714f, 0.757f,
-        0.5f, 0.0f, 0.0f, 0.1f, 0.714f, 0.757f,
-        0.5f, 0.5f, 0.0f, 0.1f, 0.714f, 0.757f,
-        0.0f, 0.5f, 0.0f, 0.1f, 0.714f, 0.757f,
+        0.0f, 0.0f, 0.0f, 0,0,0,
+        0.5f, 0.0f, 0.0f, 0,0,0,
+        0.5f, 0.5f, 0.0f, 0,0,0,
+        0.0f, 0.5f, 0.0f, 0,0,0,
 
-        0.5f, 0.0f, 0.0f, 0.1f, 0.714f, 0.757f,
-        0.5f, 0.5f, 0.0f, 0.1f, 0.714f, 0.757f,
-        0.5f, 0.0f, 0.5f, 0.1f, 0.714f, 0.757f,
-        0.5f, 0.5f, 0.5f, 0.1f, 0.714f, 0.757f,
+        0.5f, 0.0f, 0.0f, 0,0,0,
+        0.5f, 0.5f, 0.0f, 0,0,0,
+        0.5f, 0.0f, 0.5f, 0,0,0,
+        0.5f, 0.5f, 0.5f, 0,0,0,
 
-        0.0f, 0.0f, 0.5f, 0.1f, 0.714f, 0.757f,
-        0.5f, 0.0f, 0.5f, 0.1f, 0.714f, 0.757f,
-        0.5f, 0.5f, 0.5f, 0.1f, 0.714f, 0.757f,
-        0.0f, 0.5f, 0.5f, 0.1f, 0.714f, 0.757f,
+        0.0f, 0.0f, 0.5f, 0,0,0,
+        0.5f, 0.0f, 0.5f, 0,0,0,
+        0.5f, 0.5f, 0.5f, 0,0,0,
+        0.0f, 0.5f, 0.5f, 0,0,0,
 
-        0.0f, 0.0f, 0.5f, 0.1f, 0.714f, 0.757f,
-        0.0f, 0.5f, 0.5f, 0.1f, 0.714f, 0.757f,
-        0.0f, 0.5f, 0.0f, 0.1f, 0.714f, 0.757f,
-        0.0f, 0.0f, 0.0f, 0.1f, 0.714f, 0.757f,
+        0.0f, 0.0f, 0.5f, .41, .24, .12,
+        0.0f, 0.5f, 0.5f, .41, .24, .12,
+        0.0f, 0.5f, 0.0f, .41, .24, .12,
+        0.0f, 0.0f, 0.0f, .41, .24, .12,
 
-        0.5f, 0.5f, 0.5f, 0.1f, 0.714f, 0.757f,
-        0.5f, 0.5f, 0.0f, 0.1f, 0.714f, 0.757f,
-        0.0f, 0.5f, 0.0f, 0.1f, 0.714f, 0.757f,
-        0.0f, 0.5f, 0.5f, 0.1f, 0.714f, 0.757f,
+        0.5f, 0.5f, 0.5f, .41, .24, .12,
+        0.5f, 0.5f, 0.0f, .41, .24, .12,
+        0.0f, 0.5f, 0.0f, .41, .24, .12,
+        0.0f, 0.5f, 0.5f, .41, .24, .12,
 
-        0.0f, 0.0f, 0.0f, 0.1f, 0.714f, 0.757f,
-        0.5f, 0.0f, 0.0f, 0.1f, 0.714f, 0.757f,
-        0.5f, 0.0f, 0.5f, 0.1f, 0.714f, 0.757f,
-        0.0f, 0.0f, 0.5f, 0.1f, 0.714f, 0.757f
+        0.0f, 0.0f, 0.0f, 0,0,0,
+        0.5f, 0.0f, 0.0f, 0,0,0,
+        0.5f, 0.0f, 0.5f, 0,0,0,
+        0.0f, 0.0f, 0.5f, 0,0,0
     };
-
     float ac[] = {
         0.0f, 0.0f, 0.0f,0.2f, 0.2f, 0.2f,
         0.25f, 0.0f, 0.0f, 0.2f, 0.2f, 0.2f,
@@ -370,7 +363,6 @@ int main()
         0.25f, 0.0f, 0.5f, 0.2f, 0.2f, 0.2f,
         0.0f, 0.0f, 0.5f, 0.2f, 0.2f, 0.2f
     };
-
     float ceiling[] = {
         0.0f, 0.0f, 0.0f, 0.95f, 0.95f, 0.95f,
         0.5f, 0.0f, 0.0f, 0.95f, 0.95f, 0.95f,
@@ -402,7 +394,6 @@ int main()
         0.5f, 0.0f, 0.5f, 0.95f, 0.95f, 0.95f,
         0.0f, 0.0f, 0.5f, 0.95f, 0.95f, 0.95f
     };
-
     float lamp_ver[] = {
        
 
@@ -436,7 +427,6 @@ int main()
        0.5f, 0.0f, 0.5f, 0.96, .89, .26,
        0.0f, 0.0f, 0.5f, 0.96, .89, .26,
     };
-
     float fan_holder[] = {
         0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f,
         0.5f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f,
@@ -623,80 +613,6 @@ int main()
         0.5f, 0.0f, 0.5f, 0.0f, 0.0f, 0.0f,
         0.0f, 0.0f, 0.5f, 0.0f, 0.0f, 0.0f,
     };
-    float circle_vertices5[] = {
-        0.0,.70,0.0,        1.0, 1.0, 1.0,
-       0.25,.70,0.0,        1.0, 1.0, 1.0,
-       .177,.70,0.177,      1.0, 1.0, 1.0,
-       0.0,.70,0.25,        1.0, 1.0, 1.0,
-       -.177,.70,0.177,     1.0, 1.0, 1.0,
-       -0.25,.70,0.0,       1.0, 1.0, 1.0,
-       -.177,.70,-0.177,    1.0, 1.0, 1.0,
-       0.0,.70,-0.25,       1.0, 1.0, 1.0,
-       .177,.70,-0.177,     1.0, 1.0, 1.0,
-
-
-       0.0,-.30,0.0,            1.0, 1.0, 1.0,
-       1.0 / 2,-.30,0.0,        1.0, 1.0, 1.0,
-       .707 / 2,-.30,.707 / 2,  1.0, 1.0, 1.0,
-       0.0,-.30,1.0 / 2,        1.0, 1.0, 1.0,
-       -.707 / 2,-.30,.707/2,   1.0, 1.0, 1.0,
-       -1.0 / 2,-.30,0.0,       1.0, 1.0, 1.0,
-       -.707 / 2,-.30,-.707/2,  1.0, 1.0, 1.0,
-       0.0,-.30,-1.0 / 2,       1.0, 1.0, 1.0,
-       .707 / 2,-.30,-.707/2,   1.0, 1.0, 1.0,
-
-    };
-    unsigned int circle_indices[] = {
-       0,1,2,
-       0,2,3,
-       0,3,4,
-       0,4,5,
-       0,5,6,
-       0,6,7,
-       0,7,8,
-       0,8,1,
-
-       9,10,11,
-       9,11,12,
-       9,12,13,
-       9,13,14,
-       9,14,15,
-       9,15,16,
-       9,16,17,
-       9,17,10,
-
-       1,10,2,
-       10,11,2,
-       11,2,12,
-       2,12,3,
-       3,12,13,
-       3,13,4,
-       4,13,14,
-       4,14,5,
-       5,14,15,
-       5,15,6,
-       6,15,16,
-       6,16,7,
-       7,16,17,
-       7,17,8,
-       8,17,10,
-       8,10,1,
-    };
-
-    unsigned int circle_VBO, circle_VAO, circle_EBO;
-    glGenVertexArrays(1, &circle_VAO);
-    glGenBuffers(1, &circle_VBO);
-    glGenBuffers(1, &circle_EBO);
-    glBindVertexArray(circle_VAO);
-    glBindBuffer(GL_ARRAY_BUFFER, circle_VBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(circle_vertices5), circle_vertices5, GL_STATIC_DRAW);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, circle_EBO);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(circle_indices), circle_indices, GL_STATIC_DRAW);
-    // position attribute
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
-    glEnableVertexAttribArray(0);
-    //color attribute
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)12);
 
 
     unsigned int VBOCA, VAOCA, EBOCA;
@@ -732,7 +648,6 @@ int main()
     glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)12);
     glEnableVertexAttribArray(1);
 
-
     
     unsigned int VBOLMP, VAOLMP, EBOLMP;
     glGenVertexArrays(1, &VAOLMP);
@@ -751,7 +666,6 @@ int main()
     glEnableVertexAttribArray(1);
 
 
-    
     unsigned int VBO, VAO, EBO;
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
@@ -853,6 +767,7 @@ int main()
     glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)12);
     glEnableVertexAttribArray(1);
 
+
     unsigned int VBOTV, VAOTV, EBOTV;
     glGenVertexArrays(1, &VAOTV);
     glGenBuffers(1, &VBOTV);
@@ -868,6 +783,7 @@ int main()
     //color attribute
     glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)12);
     glEnableVertexAttribArray(1);
+
 
     //Fan
     unsigned int VBOF1, VAOF1, EBOF1;
@@ -940,8 +856,6 @@ int main()
     int i = 0;
 
 
-
-
     // render loop
     // -----------
     while (!glfwWindowShouldClose(window))
@@ -960,7 +874,6 @@ int main()
         // ------
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
 
         // activate shader
         ourShader.use();
@@ -1107,10 +1020,30 @@ int main()
         ourShader.setMat4("model", model);
         glBindVertexArray(VAOF2);
         glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+        //black cover
+        model = transforamtion(10, 1.5, 5, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, -3, 0.1, -1);
+        ourShader.setMat4("model", model);
+        glBindVertexArray(VAOC2);
+        glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+
+        model = transforamtion(8.5, 0, 5, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, -.1, 3.1, -1);
+        ourShader.setMat4("model", model);
+        glBindVertexArray(VAOC2);
+        glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
         //right er corner
         model = transforamtion(10, 0, 8, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, -3, 3, 1);
         ourShader.setMat4("model", model);
         glBindVertexArray(VAOF2);
+        glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+
+        model = transforamtion(10, 1.5, 8, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, -3, 0.1, 1);
+        ourShader.setMat4("model", model);
+        glBindVertexArray(VAOC2);
+        glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+
+        model = transforamtion(8.5, 0, 8, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, -.1, 3.1, 1);
+        ourShader.setMat4("model", model);
+        glBindVertexArray(VAOC2);
         glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
         //cover
         model = transforamtion(10, 0.75, 5, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, -3, 0.5, 6);
@@ -1156,6 +1089,15 @@ int main()
         ourShader.setMat4("model", model);
         glBindVertexArray(VAOC);
         glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+        //black cover
+        model = transforamtion(6.6, 1.5, 10, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, 1, 0.1, -3);
+        ourShader.setMat4("model", model);
+        glBindVertexArray(VAOC2);
+        glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+        model = transforamtion(6.6, 0, 8.5, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, 1, 3.1, -.1);
+        ourShader.setMat4("model", model);
+        glBindVertexArray(VAOC2);
+        glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
         //right er corner
         model = transforamtion(6.6, 0, 10, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, 1, 3, -3);
         ourShader.setMat4("model", model);
@@ -1166,12 +1108,20 @@ int main()
         ourShader.setMat4("model", model);
         glBindVertexArray(VAOF2);
         glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+        //black cover
+        model = transforamtion(2.1, 1.5, 10, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, -1, 0.1, -3);
+        ourShader.setMat4("model", model);
+        glBindVertexArray(VAOC2);
+        glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+        model = transforamtion(2.1, 0, 8.5, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, -1, 3.1, -.1);
+        ourShader.setMat4("model", model);
+        glBindVertexArray(VAOC2);
+        glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
         //pichoner base
         model = transforamtion(6.6, 0, 10, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, -9, 4, -1);
         ourShader.setMat4("model", model);
         glBindVertexArray(VAOC);
         glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
-
         //bed sheet
         model = transforamtion(6.6, 0.75, 10, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, -9, 0.5, -3);
         ourShader.setMat4("model", model);
@@ -1287,10 +1237,6 @@ int main()
     glDeleteVertexArrays(1, &VAO);
     glDeleteBuffers(1, &VBO);
     glDeleteBuffers(1, &EBO);
-
-    glDeleteVertexArrays(1, &circle_VAO);
-    glDeleteBuffers(1, &circle_VBO);
-    glDeleteBuffers(1, &circle_EBO);
     
     glDeleteVertexArrays(1, &VAOCA);
     glDeleteBuffers(1, &VBOCA);
